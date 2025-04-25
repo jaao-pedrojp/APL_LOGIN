@@ -15,6 +15,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import re
 
 from flask_wtf import CSRFProtect
+from flask_talisman import Talisman
 
 from models import User, DataRequest, PasswordResetToken
 from env_email import env_email
@@ -22,7 +23,35 @@ from env_email import env_email
 app = Flask(__name__, static_url_path='', static_folder='static')
 app.secret_key = os.getenv("SECRET_KEY", "chave_secreta_super_segura")
 
+csp = {
+    'default-src': [
+        '\'self\'',
+    ],
+    'img-src': [
+        '\'self\'',
+        'data:',
+        'blob:'
+    ],
+    'style-src': [
+        '\'self\'',
+        '\'unsafe-inline\'',
+        'https://fonts.googleapis.com'
+    ],
+    'script-src': [
+        '\'self\'',
+        '\'unsafe-inline\''
+    ],
+    'font-src': [
+        '\'self\'',
+        'data:',
+        'https://fonts.gstatic.com'
+    ]
+}
+
+Talisman(app, content_security_policy=csp)
+
 app.config['SESSION_PERMANENT'] = False
+
 
 app.config.update(
     SESSION_COOKIE_HTTPONLY=True,
