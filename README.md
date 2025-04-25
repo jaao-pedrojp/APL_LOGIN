@@ -1,4 +1,5 @@
-pip install flask-wtf
+Instale as bibliotecas:
+
 pip install flask flask-wtf werkzeug validators
 
-document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+Verifique spam ao receber codigo de email, expira em 5 minutos.
