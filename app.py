@@ -24,10 +24,9 @@ app.secret_key = os.getenv("SECRET_KEY", "chave_secreta_super_segura")
 
 app.config['SESSION_PERMANENT'] = False
 
-# Configurar cookies de sessão para maior segurança em ambiente local
 app.config.update(
     SESSION_COOKIE_HTTPONLY=True,
-    SESSION_COOKIE_SECURE=False  # Desativado para ambiente local sem HTTPS
+    SESSION_COOKIE_SECURE=False  
 )
 
 csrf = CSRFProtect(app)
